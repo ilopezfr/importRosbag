@@ -69,11 +69,11 @@ def importTopic(msgs, **kwargs):
         elif fmtString == '32FC1':
             frameData = np.frombuffer(data[ptr:ptr+height*width*4],np.float32)
             depth = 1
-        elif fmtString == 'bgr8':
+        elif fmtString in ['bgr8', 'rgb8']: # NEW
             frameData = np.frombuffer(data[ptr:ptr+height*width*3],np.uint8)
             depth = 3 
         else:
-            print('image format not supported:' + fmtString)
+            print('image format NOT supported: ' + fmtString)
             return None
         if depth > 1:
             frameData = frameData.reshape(height, width, depth)
